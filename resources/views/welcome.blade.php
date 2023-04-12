@@ -10,10 +10,10 @@
     <script src="{{ asset('js/apiConnection.js') }}"></script>
 </head>
 <body>
-    <p>HELLO WORLD</p>
+    <p>GameDAT - Get your polished game data</p>
     <div class="input-group mb-3">
         <input type="text" id="textbox_id" class="form-control" placeholder="Epic game" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <button onClick="getGame(document.getElementById('textbox_id').value)" class="btn btn-outline-secondary" type="button" id="button-addon2">SEARCH THE GAME!</button>
+        <button onClick="" class="btn btn-outline-secondary" type="button" id="button-addon2">SEARCH THE GAME!</button>
     </div>
 </body>
 </html>

@@ -10,6 +10,6 @@ class GameController extends Controller
     public function show($title)
     {
         $game = Game::getGame($title);
-        return view('games.show', ['game' => $game]);
+        return view('game.show', ['game' => $game]);
     }
 }

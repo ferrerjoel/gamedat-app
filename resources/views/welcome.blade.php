@@ -13,7 +13,14 @@
     <p>GameDAT - Get your polished game data</p>
     <div class="input-group mb-3">
         <input type="text" id="textbox_id" class="form-control" placeholder="Epic game" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <button onClick="" class="btn btn-outline-secondary" type="button" id="button-addon2">SEARCH THE GAME!</button>
+        <button onClick="searchGame()" class="btn btn-outline-secondary" type="button" id="button-addon2">SEARCH THE GAME!</button>
     </div>
+
+    <script>
+        function searchGame() {
+            var input = document.getElementById("textbox_id").value;
+            window.location.href = "http://127.0.0.1:8000/games/" + input;
+        }
+    </script>
 </body>
 </html>

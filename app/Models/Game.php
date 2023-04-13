@@ -9,7 +9,7 @@ class Game extends Model
 {
     public static function getGame($title)
     {
-        $response = Http::get("http://192.168.1.39:5000/api/games/{$title}"); // Using localhost doesn't work
+        $response = Http::get("http://192.168.56.1:5000/api/games/{$title}"); // Using localhost doesn't work
         return $response->json();
     }
 }

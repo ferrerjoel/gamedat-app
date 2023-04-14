@@ -12,12 +12,29 @@
         <nav class="navbar bg-dark" data-bs-theme="dark">
             <div class="container-fluid">
                 <a class="navbar-brand">GameDAT - Know your game!</a>
-                <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <form class="d-flex">
+                    <input class="form-control me-2" id="textbox_header_id" placeholder="Search" aria-label="Search">
+                    <button type="button" id="headder-button" class="btn btn-outline-success" onClick="searchGame()">Search</button>
                 </form>
             </div>
         </nav>
+
+        <script>
+            var input = document.getElementById("textbox_header_id");
+            function searchGame() {
+                var inputValue = document.getElementById("textbox_header_id").value;
+                window.location.href = "http://127.0.0.1:8000/games/" + inputValue;
+            }
+            input.addEventListener("keypress", function(event) {
+                // If the user presses the "Enter" key on the keyboard
+                if (event.key === "Enter") {
+                    // Cancel the default action, if needed
+                    event.preventDefault();
+                    // Trigger the button element with a click
+                    document.getElementById("headder-button").click();
+                }
+            });
+        </script>
     @endsection
     @section('footer')
         <!-- <nav class="navbar bg-dark fixed-bottom" data-bs-theme="dark">

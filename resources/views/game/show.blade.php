@@ -19,7 +19,7 @@
                 Your browser does not support the video tag.
             </video>
         @endif
-        <div id="carouselExampleAutoplaying my-1" class="carousel slide" data-bs-ride="carousel">
+        <div id="carouselExampleAutoplaying" class="carousel slide my-1" data-bs-ride="carousel">
             <div class="carousel-inner">
                 @if (isset($game['screenshots']) && count($game['screenshots']) > 0)
                     @foreach ($game['screenshots'] as $index => $screenshot)

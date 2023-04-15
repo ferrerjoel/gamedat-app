@@ -11,10 +11,11 @@
 </head>
 <body>
     @yield('header')
-    <div class="container">
+    <div class="container my-5">
+        <h1 class="text-center my-5">Search data for more than 4300+ games!</h1>
         <div class="input-group mb-3">
             <input type="text" id="textbox_id" class="form-control" placeholder="Epic game" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button onClick="searchGame()" class="btn btn-outline-primary" type="button" id="button-addon2">SEARCH THE GAME!</button>
+            <button onClick="searchGame()" class="btn btn-outline-success" type="button" id="button-addon2">SEARCH THE GAME!</button>
         </div>
     </div>
     <script>

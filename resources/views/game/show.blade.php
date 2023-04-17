@@ -71,6 +71,49 @@
             @if(isset($game['website']))
                 <li class="list-group-item">Website: {{ $game['website'] }}</li>
             @endif
+            
+            <li class="list-group-item">Developers: 
+                @if(isset($game['developers']) && count($game['developers']) > 0)
+                    @foreach($game['developers'] as $index => $developer)
+                        {{ $developer }}@if(!$loop->last),@endif
+                    @endforeach
+                @endif
+            </li>
+
+            <li class="list-group-item">Publishers: 
+                @if(isset($game['publishers']) && count($game['publishers']) > 0)
+                    @foreach($game['publishers'] as $index => $publisher)
+                        {{ $publisher }}@if(!$loop->last),@endif
+                    @endforeach
+                @endif
+            </li>
+
+            <li class="list-group-item">Genres: 
+                @if(isset($game['genres']) && count($game['genres']) > 0)
+                    @foreach($game['genres'] as $index => $genre)
+                        {{ $genre['description'] }}@if(!$loop->last),@endif
+                    @endforeach
+                @endif
+            </li>
+        </ul>
+        <ul class="list-group my-1">
+            @if(isset($game['pc_requirements']['minimum']))
+                <li class="list-group-item">Website: {{ $game['pc_requirements']['minimum'] }}</liv>
+            @endif
+        </ul>
+
+        <ul class="list-group my-1">
+            <li class="list-group-item">Achievements: 
+                @if(isset($game['achievements']) && count($game['achievements']['highlighted']) > 0)
+                    @foreach($game['achievements']['highlighted'] as $index => $achievement)
+                        <div>
+                            <img src="{{ $achievement['path'] }}" alt="{{ $achievement['name'] }}" title="{{ $achievement['name'] }}" width="64" height="64">
+                            {{ $achievement['name'] }}
+                        </div>
+                    @endforeach
+                @endif
+            </li>
+
         </ul>
     </div>
     @yield('footer')

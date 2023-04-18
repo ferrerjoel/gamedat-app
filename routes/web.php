@@ -18,3 +18,6 @@ Route::get('/', function () {
 });
 
 Route::get('/games/{title}', 'App\Http\Controllers\GameController@show');
+
+Route::get('/titles', 'App\Http\Controllers\GameController@getSuggestions');
+

@@ -12,4 +12,9 @@ class GameController extends Controller
         $game = Game::getGame($title);
         return view('game.show', ['game' => $game]);
     }
+
+    public function getSuggestions(Request $request) {
+        $games = Game::getGameTitles();
+        return $games;
+    }
 }

@@ -19,6 +19,7 @@
                 Your browser does not support the video tag.
             </video>
         @endif
+        @if (isset($game['screenshots']) && count($game['screenshots']) > 0)
         <div id="carouselExampleAutoplaying" class="carousel slide my-2" data-bs-ride="carousel">
             <div class="carousel-inner">
                 @if (isset($game['screenshots']) && count($game['screenshots']) > 0)
@@ -41,33 +42,42 @@
                 </button>
             </div>
         </div>
+        @endif
         <ul class="list-group my-4">
-            <li class="list-group-item">{{ $game['short_description'] }}</li>
-            <li class="list-group-item">Release Date: {{ $game['release_date']['date'] }}</li>
-            <li class="list-group-item">Genres: 
-                @if(isset($game['genres']) && count($game['genres']) > 0)
+            @if(isset($game['short_description']))
+                <li class="list-group-item">{{ $game['short_description'] }}</li>
+            @endif
+
+            @if(isset($game['release_date']))
+                <li class="list-group-item">Release Date: {{ $game['release_date']['date'] }}</li>
+            @endif
+
+            @if(isset($game['genres']) && count($game['genres']) > 0)
+                <li class="list-group-item">Genres: 
                     @foreach($game['genres'] as $index => $genre)
                         {{ $genre['description'] }}@if(!$loop->last),@endif
                     @endforeach
-                @endif
-            </li>
+                </li>
+            @endif
+
+            @if(isset($game['categories']) && count($game['categories']) > 0)
+                <li class="list-group-item">Categories: 
+                    @foreach($game['categories'] as $index => $category)
+                        {{ $category['description'] }}@if(!$loop->last),@endif
+                    @endforeach
+                </li>
+            @endif
+
             @if($game['required_age'] > 0)
                 <li class="list-group-item">PEGI: {{ $game['required_age'] }}</li>
             @endif
+
             @if(isset($game['metacritic']))
                 <li class="list-group-item">Metacritic: {{ $game['metacritic']['score'] }}</li>
             @endif
 
-            <li class="list-group-item">Genres: 
-                @if(isset($game['genres']) && count($game['genres']) > 0)
-                    @foreach($game['genres'] as $index => $genre)
-                        {{ $genre['description'] }}@if(!$loop->last),@endif
-                    @endforeach
-                @endif
-            </li>
-
-            <li class="list-group-item">Platforms: 
-                @if(isset($game['platforms']) && count($game['platforms']) > 0)
+            @if(isset($game['platforms']) && count($game['platforms']) > 0)
+                <li class="list-group-item">Platforms: 
                     @foreach($game['platforms'] as $platform => $value)
                         @if($value)
                             {{ ucfirst($platform) }}
@@ -76,51 +86,49 @@
                             @endif
                         @endif
                     @endforeach
-                @endif
-            </li>
+                </li>
+            @endif
 
-            <li class="list-group-item">Developers: 
-                @if(isset($game['developers']) && count($game['developers']) > 0)
+            @if(isset($game['developers']) && count($game['developers']) > 0)
+                <li class="list-group-item">Developers: 
                     @foreach($game['developers'] as $index => $developer)
                         {{ $developer }}@if(!$loop->last),@endif
                     @endforeach
-                @endif
-            </li>
+                </li>
+            @endif
 
-            <li class="list-group-item">Publishers: 
-                @if(isset($game['publishers']) && count($game['publishers']) > 0)
+            @if(isset($game['publishers']) && count($game['publishers']) > 0)
+                <li class="list-group-item">Publishers: 
                     @foreach($game['publishers'] as $index => $publisher)
                         {{ $publisher }}@if(!$loop->last),@endif
                     @endforeach
-                @endif
-            </li>
-
-            
+                </li>
+            @endif
 
             @if(isset($game['website']))
                 <li class="list-group-item">Website: {{ $game['website'] }}</li>
             @endif
-
         </ul>
+
         <ul class="list-group my-4">
             @if(isset($game['pc_requirements']['minimum']))
                 <li class="list-group-item">Website: {{ $game['pc_requirements']['minimum'] }}</liv>
             @endif
         </ul>
 
+        @if(isset($game['achievements']) && count($game['achievements']['highlighted']) > 0)
         <ul class="list-group my-4">
-            <li class="list-group-item">Common achievements: 
-                @if(isset($game['achievements']) && count($game['achievements']['highlighted']) > 0)
-                    @foreach($game['achievements']['highlighted'] as $index => $achievement)
-                        <div class="my-2">
-                            <img src="{{ $achievement['path'] }}" alt="{{ $achievement['name'] }}" title="{{ $achievement['name'] }}" width="64" height="64">
-                            {{ $achievement['name'] }}
-                        </div>
-                    @endforeach
-                @endif
+            <li class="list-group-item">Highlighted achievements: 
+                @foreach($game['achievements']['highlighted'] as $index => $achievement)
+                    <div class="my-2">
+                        <img src="{{ $achievement['path'] }}" alt="{{ $achievement['name'] }}" title="{{ $achievement['name'] }}" width="64" height="64">
+                        {{ $achievement['name'] }}
+                    </div>
+                @endforeach
             </li>
-
         </ul>
+        @endif
+
     </div>
     @yield('footer')
 </body>

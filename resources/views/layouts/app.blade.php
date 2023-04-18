@@ -11,13 +11,15 @@
 <body class="bg-secondary">
     @section('header')
         <nav class="navbar bg-dark" data-bs-theme="dark">
-            <div class="container-fluid">
-                <a class="navbar-brand">GameDAT - Know your game!</a>
-                <form class="d-flex">
-                    <input class="form-control me-2" id="textbox_header_id" placeholder="Search" aria-label="Search" onkeyup="showSuggestions()">
+            <div class="container-fluid position-relative">
+            <a class="navbar-brand" href="/">GameDAT - Know your game!</a>
+                <div class="position-relative">
+                    <form class="d-flex">
+                        <input class="form-control me-2" id="textbox_header_id" placeholder="Search" aria-label="Search" onkeyup="showSuggestions()">
+                        <button type="button" id="header-button" class="btn btn-outline-success" onClick="searchGame()">Search</button>
+                    </form>
                     <ul class="dropdown-menu dropdown-menu-end" id="suggestions-dropdown" aria-labelledby="dropdownMenuButton"></ul>
-                    <button type="button" id="headder-button" class="btn btn-outline-success" onClick="searchGame()">Search</button>
-                </form>
+                </div>
             </div>
         </nav>
         @php
@@ -49,7 +51,6 @@
                         for (var i = 0; i < titles.length; i++) {
                             var title = titles[i]["name"].toString();
                             if (title.includes(inputValue)) {
-                                console.log("WO");
                                 var item = document.createElement("li");
                                 item.innerHTML = `<a class="dropdown-item" href="/games/${title}" onclick="window.location.href="/games/${title}"" href="#">${title}</a>`;
                                 dropdown.append(item);
@@ -60,9 +61,14 @@
                         dropdown.classList.remove("show");
                     }
                 }
-                input.addEventListener("blur", function() {
-                    // dropdown.classList.remove("show");
+                document.addEventListener("click", function(e) {
+                    const input = document.getElementById("textbox_header_id");
+                    const dropdown = document.getElementById("suggestions-dropdown");
+                    if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+                        dropdown.classList.remove("show");
+                    }
                 });
+
             </script>
         ';
     @endphp

@@ -15,3 +15,15 @@ img {
     border-width: 1px;
     border-color: #323538;
 }
+
+.position-relative {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: auto;
+    right: 0;
+    z-index: 1000;
+}

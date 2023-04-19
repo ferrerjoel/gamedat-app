@@ -10,7 +10,7 @@
 </head>
 <body class="bg-secondary">
     @section('header')
-        <nav class="navbar bg-dark" data-bs-theme="dark">
+        <nav class="navbar bg-dark fixed-top" data-bs-theme="dark">
             <div class="container-fluid position-relative">
             <a class="navbar-brand" href="/">GameDAT - Know your game!</a>
                 <div class="position-relative">
@@ -50,11 +50,17 @@
                         document.getElementById("suggestions-dropdown").classList.add("show");
                         for (var i = 0; i < titles.length; i++) {
                             var title = titles[i]["name"].toString();
-                            if (title.includes(inputValue)) {
+                            if (title.toLowerCase().includes(inputValue.toLowerCase())) {
                                 var item = document.createElement("li");
                                 item.innerHTML = `<a class="dropdown-item" href="/games/${title}" onclick="window.location.href="/games/${title}"" href="#">${title}</a>`;
                                 dropdown.append(item);
                             }
+                        }
+                        // Add message if there are no results
+                        if (dropdown.innerHTML === "") {
+                            var item = document.createElement("li");
+                            item.innerHTML = "No games found";
+                            dropdown.append(item);
                         }
                     } else {
                         // Remove show class from dropdown

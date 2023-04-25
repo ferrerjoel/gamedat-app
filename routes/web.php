@@ -14,9 +14,7 @@ use App\Models\Game;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');;
+Route::get('/', 'App\Http\Controllers\WelcomeController@show')->name('home');;
 
 Route::get('/games/{title}', 'App\Http\Controllers\GameController@show');
 

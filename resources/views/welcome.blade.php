@@ -22,6 +22,13 @@
             </form>
             <ul class="dropdown-menu dropdown-menu-end" id="suggestions-dropdown" aria-labelledby="dropdownMenuButton"></ul>
         </div>
+        @if (isset($randomGame))
+    
+    <h3 class="text-center mt-5"><hr>You should try<hr></h3>
+    <h5 class="text-center my-2">{{ $randomGame }}</h5>
+
+@endif
+
     </div>
     @php
         $titles = json_encode(\App\Models\Game::getGameTitles());

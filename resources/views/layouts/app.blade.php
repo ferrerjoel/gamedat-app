@@ -7,6 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <script src="{{ asset('js/search.js') }}"></script>
+
 </head>
 <body class="bg-secondary">
     @section('header')
@@ -15,7 +17,7 @@
             <a class="navbar-brand" href="/">GameDAT - Know your game!</a>
                 <div class="position-relative">
                     <form class="d-flex">
-                        <input class="form-control me-2" id="textbox_header_id" placeholder="Search" aria-label="Search" onkeyup="showSuggestions()">
+                        <input class="form-control me-2" autocomplete="off" id="search_bar_id" placeholder="Search" aria-label="Search" onkeyup="showSuggestions()">
                         <button type="button" id="header-button" class="btn btn-outline-success" onClick="searchGame()">Search</button>
                     </form>
                     <ul class="dropdown-menu dropdown-menu-end" id="suggestions-dropdown" aria-labelledby="dropdownMenuButton"></ul>
@@ -26,9 +28,9 @@
         $titles = json_encode(\App\Models\Game::getGameTitles());
         echo '
             <script>
-                var input = document.getElementById("textbox_header_id");
+                var input = document.getElementById("search_bar_id");
                 function searchGame() {
-                    var inputValue = document.getElementById("textbox_header_id").value;
+                    var inputValue = document.getElementById("search_bar_id").value;
                     window.location.href = "http://127.0.0.1:8000/games/" + inputValue;
                 }
                 input.addEventListener("keypress", function(event) {
@@ -37,38 +39,14 @@
                         // Cancel the default action, if needed
                         event.preventDefault();
                         // Trigger the button element with a click
-                        document.getElementById("headder-button").click();
+                        document.getElementById("header-button").click();
                     }
                 });
-                var titles = ' . $titles . ';
-                var dropdown = document.getElementById("suggestions-dropdown");
-                function showSuggestions() {
-                    var input = document.getElementById("textbox_header_id");
-                    var inputValue = input.value.toString();
-                    dropdown.innerHTML = "";
-                    if (inputValue.length >= 4) {
-                        document.getElementById("suggestions-dropdown").classList.add("show");
-                        for (var i = 0; i < titles.length; i++) {
-                            var title = titles[i]["name"].toString();
-                            if (title.toLowerCase().includes(inputValue.toLowerCase())) {
-                                var item = document.createElement("li");
-                                item.innerHTML = `<a class="dropdown-item" href="/games/${title}" onclick="window.location.href="/games/${title}"" href="#">${title}</a>`;
-                                dropdown.append(item);
-                            }
-                        }
-                        // Add message if there are no results
-                        if (dropdown.innerHTML === "") {
-                            var item = document.createElement("li");
-                            item.innerHTML = "No games found";
-                            dropdown.append(item);
-                        }
-                    } else {
-                        // Remove show class from dropdown
-                        dropdown.classList.remove("show");
-                    }
-                }
+                var titles = ' . $titles . '; // This is used by search.js showSuggestions function
+                document.getElementById("search_bar_id").addEventListener("keyup", showSuggestions);
+
                 document.addEventListener("click", function(e) {
-                    const input = document.getElementById("textbox_header_id");
+                    const input = document.getElementById("search_bar_id");
                     const dropdown = document.getElementById("suggestions-dropdown");
                     if (!input.contains(e.target) && !dropdown.contains(e.target)) {
                         dropdown.classList.remove("show");
@@ -79,6 +57,13 @@
         ';
     @endphp
 
+    @endsection
+    @section('header_no_search')
+        <nav class="navbar bg-dark fixed-top" data-bs-theme="dark">
+            <div class="container-fluid position-relative">
+            <a class="navbar-brand" href="/">GameDAT - Know your game!</a>
+            </div>
+        </nav>
     @endsection
     @section('footer')
         <!-- <nav class="navbar bg-dark fixed-bottom" data-bs-theme="dark">

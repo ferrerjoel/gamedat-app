@@ -17,17 +17,16 @@
         <h1 class="text-center my-5">Search data for more than 4300+ games!</h1>
         <div class="position-relative">
             <form class="input-group mb-3">
-                <input type="text" id="search_bar_id" autocomplete="off" class="form-control" placeholder="Epic game" aria-label="Recipient's username" aria-describedby="button-addon2" onkeyup="showSuggestions()">
+                <input type="text" id="search_bar_id" autocomplete="off" class="form-control" placeholder="What game do you want to search?" aria-label="Recipient's username" aria-describedby="button-addon2" onkeyup="showSuggestions()">
                 <button onClick="searchGame()" class="btn btn-outline-success" type="button" id="search-button">SEARCH THE GAME!</button>
             </form>
             <ul class="dropdown-menu dropdown-menu-end" id="suggestions-dropdown" aria-labelledby="dropdownMenuButton"></ul>
         </div>
-        @if (isset($randomGame))
-    
-    <h3 class="text-center mt-5"><hr>You should try<hr></h3>
-    <h5 class="text-center my-2">{{ $randomGame }}</h5>
 
-@endif
+        @if (isset($randomGame))
+            <h3 class="text-center mt-5"><hr>You should try<hr></h3>
+            <h5 class="text-center my-2"><a href="/games/{{ $randomGame }}">{{ $randomGame }}</a><hr></h5>
+        @endif
 
     </div>
     @php
